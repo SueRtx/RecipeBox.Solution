@@ -1,30 +1,20 @@
-using System;
-using System.Collections.Generic;
-using ToDoList.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
-class Program
+namespace ToDoList
 {
-  static void Main()
+  public class Program
   {
-    Console.WriteLine("Welcome to the To Do List");
-    Console.WriteLine("Would like to add an item to your list or view your list? (Add/View)");
-    string addList = Console.ReadLine();
-    
-    if(addList.ToLower() == "add")
+    public static void Main(string[] args)
     {
-      Console.WriteLine("Please enter description for the new item");
-      string taskToDo = Console.ReadLine();
-      Item taskToDoItem = new Item(taskToDo);
-      Console.WriteLine($"{taskToDo} was added to your To Do List.");
-      Main();
-    } 
-    else if (addList.ToLower() == "view")
-    {
-      List<Item> toDoList = Item.GetAll();
-      foreach(Item item in toDoList) 
-      {
-        Console.WriteLine(item.Description);
-      }
-    } 
+      var host = new WebHostBuilder()
+        .UseKestrel()
+        .UseContentRoot(Directory.GetCurrentDirectory())
+        .UseIISIntegration()
+        .UseStartup<Startup>()
+        .Build();
+
+      host.Run();
+    }
   }
 }
