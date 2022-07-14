@@ -15,10 +15,10 @@ namespace ToDoList.Controllers
     }
 
     [HttpGet("/items/new")]
-    public ActionResult New()
-    {
-      return View();
-    }
+  public ActionResult New()
+  {
+    return View();
+  }
 
     [HttpPost("/items")]
     public ActionResult Create(string description)
@@ -40,5 +40,7 @@ namespace ToDoList.Controllers
       Item foundItem = Item.Find(id);
       return View(foundItem);
     }
+
+    
   }
 }
