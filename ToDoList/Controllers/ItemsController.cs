@@ -24,19 +24,24 @@ namespace ToDoList.Controllers
       }
     }
 
-//     public ActionResult Create()
-//     {
-//       ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-//       return View();
-//     }
+    public ActionResult Create()
+    {
+        ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+        return View();
+    }
 
-//     [HttpPost]
-//     public ActionResult Create(Item item)
-//     {
-//       _db.Items.Add(item);
-//       _db.SaveChanges();
-//       return RedirectToAction("Index");
-//     }
+    [HttpPost]
+    public ActionResult Create(Item item, int CategoryId)
+    {
+        _db.Items.Add(item);
+        _db.SaveChanges();
+        if (CategoryId != 0)
+        {
+            _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+            _db.SaveChanges();
+        }
+        return RedirectToAction("Index");
+    }
 
   public ActionResult Details(int id)
   {
