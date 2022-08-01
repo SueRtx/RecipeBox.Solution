@@ -88,18 +88,26 @@ namespace ToDoList.Controllers
 
     public ActionResult Delete(int id)
     {
-        var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        return View(thisItem);
+      var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      return View(thisItem);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      _db.Items.Remove(thisItem);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
     [HttpPost]
     public ActionResult DeleteCategory(int joinId)
     {
-        var joinEntry = _db.CategoryItem.FirstOrDefault(entry => entry.CategoryItemId == joinId);
-        _db.CategoryItem.Remove(joinEntry);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
-    }
+      var joinEntry = _db.CategoryItem.FirstOrDefault(entry => entry.CategoryItemId == joinId);
+      _db.CategoryItem.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
