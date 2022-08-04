@@ -42,6 +42,7 @@ namespace ToDoList.Controllers
         .FirstOrDefault(category => category.CategoryId == id);
       return View(thisCategory);
   }
+  
     public ActionResult Edit(int id)
     {
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);

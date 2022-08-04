@@ -4,7 +4,7 @@
 
 @using ToDoList.Models;
 
-<h1>Categories</h1>
+<h1>Category List</h1>
 
 @if (@Model.Count == 0)
 {
@@ -18,5 +18,6 @@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new category", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<h5>@Html.ActionLink("Add New Category", "Create")</h5>
+<h5>@Html.ActionLink("Item List", "Index", "Items")</h5>
+<h5>@Html.ActionLink("Home", "Index", "Home")</h5>
