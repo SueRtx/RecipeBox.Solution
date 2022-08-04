@@ -10,7 +10,7 @@
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This category does not contain any items</p>
+  <h4>This Category Does Not Contain Item</h4>
 }
 else
 {
@@ -22,8 +22,11 @@ else
   }
   </ul>
 }
+<hr />
+<h5>@Html.ActionLink("Edit Category", "Edit", new { id = Model.CategoryId })</h5>
+<h5>@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</h5>
 
-<p>@Html.ActionLink("Back to categories", "Index")</p>
-<p>@Html.ActionLink("Edit Category", "Edit", new { id = Model.CategoryId })</p>
-<p>@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</p>
+<h5>@Html.ActionLink("Item List", "Index", "Items")</h5>
+<h5>@Html.ActionLink("Category List", "Index")</h5>
+
  
