@@ -7,6 +7,7 @@ namespace ToDoList.Models
 {
   public class ToDoListContextFactory : IDesignTimeDbContextFactory<ToDoListContext>
   {
+
     ToDoListContext IDesignTimeDbContextFactory<ToDoListContext>.CreateDbContext(string[] args)
     {
       IConfigurationRoot configuration = new ConfigurationBuilder()

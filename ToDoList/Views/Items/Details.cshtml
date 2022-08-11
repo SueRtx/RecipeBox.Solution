@@ -3,62 +3,44 @@
 }
 
 @model ToDoList.Models.Item
+<div class="container">
 
-<h2>Item Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
-<h3>@Html.Label("Due Date"): @Html.DisplayFor(model => model.Date)</h3>
-@if(@Model.Completed == true)
-{
-  <h3>@Html.Label("Completed"): Yes</h3>
-}
-else
-{
-  <h3>@Html.Label("Completed"): No</h3>
-}
+  <h2>Item Details</h2>
+  <hr />
+  <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 
-
-@if(@Model.JoinEntities.Count == 0)
-{
-  <p>This item does not belong to any category</p>
-}
-else
-{
-  <h4>Categories this item belongs to:</h4>
-
-  @* <ul>
-  @foreach (var join in Model.JoinEntities)
+  <h5 class="pageLink">@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId })</h5>
+<h5 class="pageLink2">@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</h5>
+<br/>
+  @if(@Model.JoinEntities.Count == 0)
   {
-    
-    @using (@Html.BeginForm("DeleteCategory", "Items"))
-    {
-      @Html.Hidden("joinId", @join.CategoryItemId)
-      <input type="submit" value="Delete"/>
-    }
+    <p>This Item does not belong to any Categories</p>
   }
-</ul> *@
-  @* <ul>
-    @foreach (var join in Model.JoinEntities)
+  else
+  {
+    <hr />
+    <h4> Categories List for <strong>@Html.DisplayFor(model => model.Description)</strong></h4>
+
+   
+ 
+    @foreach(var join in Model.JoinEntities)
     {
       <li>@join.Category.Name</li>
-    }
-  </ul> *@
-}
 
-<ul>
-  @foreach (var join in Model.JoinEntities)
-  {
-    <li>@join.Category.Name</li>
-    @using (@Html.BeginForm("DeleteCategory", "Items"))
-    {
-      @Html.Hidden("joinId", @join.CategoryItemId)
-      <input type="submit" value="Delete"/>
+      @using (Html.BeginForm("DeleteCategory", "Items"))
+      {
+        @Html.Hidden("joinId", @join.CategoryItemId)
+        <input type="submit" value="Delete"  class="btn" />
+      }
     }
+    
   }
-</ul>
+  <hr />
+  <h5 class="pageLink2">
+  @Html.ActionLink("Add more Category for this Item", "AddCategory", new { id = Model.ItemId })</h5> 
+  <h5 class="pageLink2">@Html.ActionLink("Item List", "Index")</h5> 
+</div>
 
 
-<h5>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId })</h5>
-<h5>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</h5>
-<h5>@Html.ActionLink("Add Category", "AddCategory", new { id = Model.ItemId })</h5>
-<h5>@Html.ActionLink("Back To List", "Index")</p>
+
+

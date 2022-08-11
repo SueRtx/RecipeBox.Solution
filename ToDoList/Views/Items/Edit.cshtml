@@ -4,26 +4,28 @@
 
 @model ToDoList.Models.Item
 
-<h2>Edit Item</h2>
-<hr>
-<h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
+<div class="container">
+  <h2>Edit Item</h2>
+  <hr>
+  <h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
 
-@using (Html.BeginForm())
-{
-  @Html.HiddenFor(model => model.ItemId)
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.ItemId)
 
-  <h3>@Html.Label("Completed?"): @Html.CheckBox("Completed", false)</h3>
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
 
-  @Html.Label("Select Category")
-  @Html.DropDownList("CategoryId")
-<br>
-  @Html.LabelFor(model => model.Description)
-  @Html.EditorFor(model => model.Description, new { value="model.Description" })
-<br>
-  @Html.Label("Due Date")
-  @Html.TextBoxFor(model => model.Date, new { required = "required", @type = "date", value = "model.Date" })
-<br> 
+    @Html.Label("Select category")
+    @Html.DropDownList("CategoryId")
+  <br />
+    <input type="submit" value="Save" class="pageLink" />
+  }
 
-  <input type="submit" value="save" class="btn btn-success" />
-}
-<h5>@Html.ActionLink("Back To List", "Index")</h5>
+  <h5 class="pageLink">@Html.ActionLink("Cancel", "Index")</h5>
+</div>
+
+
+
+<h5 class="pageLink">@Html.ActionLink("Cancel", "Index")</h5>
+</div>

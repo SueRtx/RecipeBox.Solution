@@ -8,7 +8,7 @@ using ToDoList.Models;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ToDoListContext))]
-    [Migration("20220804000831_Initial")]
+    [Migration("20220811192725_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,12 +58,6 @@ namespace ToDoList.Migrations
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Date")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

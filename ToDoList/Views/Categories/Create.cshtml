@@ -4,14 +4,19 @@
 
 @model ToDoList.Models.Category
 
-<h4>Add Category</h4>
-@using (Html.BeginForm())
-{
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
-  <input type="submit" value="Add Category" />
-}
+<div class="container">
+  <h2>Add Category</h2>
 
-<h5>@Html.ActionLink("Category List", "Index")</h5>
-@* <h5>@Html.ActionLink("Item List", "Index", "Items")</h5> *@
-<h5>@Html.ActionLink("Home", "Index", "Home")</h5>
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name, new { required = "required" })
+  <r />
+    <input type="submit" value="Add" class="btn" />
+  }
+<hr />
+  <h5 class="pageLink">@Html.ActionLink("Category List", "Index")</h5>
+  @* <h5 class="pageLink">@Html.ActionLink("Item List", "Index", "Items")</h5> *@
+  <h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
+
+</div>

@@ -26,9 +26,7 @@ namespace ToDoList.Migrations
                 {
                     ItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Date = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Completed = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
