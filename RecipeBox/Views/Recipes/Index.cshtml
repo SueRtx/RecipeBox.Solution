@@ -1,0 +1,49 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBox.Models;
+@model IEnumerable<RecipeBox.Models.Recipe>
+<div class="container">
+<h1>Recipes for @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Recipe recipe in Model)
+    {
+      <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId }, new { @class="linkWordColor" })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No Recipes have been added yet!</h3>
+}
+
+<h5 class="pageLink">@Html.ActionLink("Add new Recipe", "Create")</h5>
+<h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
+
+</div>
+@* @using RecipeBox.Models;
+@model List<RecipeBox.Models.Recipe>;
+
+<div class="container">
+<h1>Recipes</h1>
+ 
+  @if (@Model.Count == 0)
+  {
+    <h3>No Recipes have been added yet!</h3>
+  } 
+  else
+  {
+    <h4>* Click on Recipe to See Details *</h4>
+    @foreach (Recipe Recipe in Model)
+    {
+      <li>@Html.ActionLink($"{recipe.Description}", "Details", new { id = recipe.RecipeId }, new { @class="linkWordColor" })</li>
+    }
+  }
+
+  <h5 class="pageLink">@Html.ActionLink("Add new Recipe", "Create")</h5>
+  <h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
+</div> *@
