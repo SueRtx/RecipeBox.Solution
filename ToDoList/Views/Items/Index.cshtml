@@ -3,6 +3,30 @@
 }
 
 @using ToDoList.Models;
+@model IEnumerable<ToDoList.Models.Item>
+
+<h1>Items for @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Item item in Model)
+    {
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No items have been added yet!</h3>
+}
+
+<p>@Html.ActionLink("Add new item", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+
+
+@* @using ToDoList.Models;
 @model List<ToDoList.Models.Item>;
 
 <div class="container">
@@ -23,4 +47,4 @@
 
   <h5 class="pageLink">@Html.ActionLink("Add new item", "Create")</h5>
   <h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
-</div>
+</div> *@
