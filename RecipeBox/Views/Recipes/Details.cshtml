@@ -3,42 +3,50 @@
 }
 
 @model RecipeBox.Models.Recipe
+
 <div class="container">
-
-  <h2>RecipeBox Details</h2>
+  <h2>Recipe Details</h2>
   <hr />
-  <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
-  <h5 class="pageLink">@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId })</h5>
-<h5 class="pageLink2">@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</h5>
-<br/>
-  @if(@Model.JoinEntities.Count == 0)
-  {
-    <p>This RecipeBox does not belong to any Categories</p>
-  }
-  else
-  {
-    <hr />
-    <h4> Categories List for <strong>@Html.DisplayFor(model => model.Name)</strong></h4>
+  <div class = "row">
+    <div class = "col">
+      <h4>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
+      <h4>@Html.DisplayNameFor(model => model.Ingredients): @Html.DisplayFor(model => model.Ingredients)</h4>
+      <h4>@Html.DisplayNameFor(model => model.Instructions): @Html.DisplayFor(model => model.Instructions)</h4>
 
-   
- 
-    @foreach(var join in Model.JoinEntities)
-    {
-      <li>@join.Category.Name</li>
+      <h5 class="pageLink">@Html.ActionLink("Edit", "Edit", new { id = Model.RecipeId })</h5>
+      <h5 class="pageLink">@Html.ActionLink("Delete", "Delete", new { id = Model.RecipeId })</h5>
+    </div>
 
-      @using (Html.BeginForm("DeleteCategory", "Recipe"))
+    <div class = "col">
+      @if(@Model.JoinEntities.Count == 0)
       {
-        @Html.Hidden("joinId", @join.CategoryRecipeId)
-        <input type="submit" value="Delete"  class="btn" />
+        <h4>This RecipeBox does not belong to any Categories</h4>
       }
-    }
-    
-  }
-  <hr />
-  <h5 class="pageLink2">
+      else
+      {
+        <h4> Categories List for @Html.DisplayFor(model => model.Name)</h4>
+
+        @foreach(var join in Model.JoinEntities)
+        {
+          <h4>@join.Category.Name</h4>
+
+          @using (Html.BeginForm("DeleteCategory", "Recipes"))
+          {
+            @Html.Hidden("joinId", @join.CategoryRecipeId)
+            <input type="submit" value="Delete"  class="btn" />
+          }
+        }
+        
+      }
+    </div>
+  </div>
+  <h5 class="pageLink">
   @Html.ActionLink("Add more Category for this Recipe", "AddCategory", new { id = Model.RecipeId })</h5> 
-  <h5 class="pageLink2">@Html.ActionLink("Recipe List", "Index")</h5> 
+
+  <h5 class="pageLink">@Html.ActionLink("Recipe List", "Index")</h5> 
+
+  <h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
 </div>
 
 

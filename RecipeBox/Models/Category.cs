@@ -12,6 +12,7 @@ namespace RecipeBox.Models
     public string Name { get; set; }
     public int CategoryId { get; set; }
 
-    public virtual ICollection<CategoryRecipe> JoinEntities { get; set; }    
+    public virtual ICollection<CategoryRecipe> JoinEntities { get; set; }
+    public virtual ApplicationUser User { get; set; }   
   }
 }

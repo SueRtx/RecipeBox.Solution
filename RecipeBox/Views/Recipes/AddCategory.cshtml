@@ -7,7 +7,7 @@
 <div class="container">
   <h2>Add Category</h2>
   <hr />
-  <h4>Add a category to this Recipt: @Html.DisplayFor(model => model.Name)</h4>
+  <h4>Add a Category to this Recipt: @Html.DisplayFor(model => model.Name)</h4>
 
   @using (Html.BeginForm())
   {
@@ -16,9 +16,9 @@
       @Html.Label("Select Category ")
       @Html.DropDownList("CategoryId")
   <br />
-      <input type="submit" value="Save" class="pageLink"/>
+      <input type="submit" value="Save" class="btn"/>
   }
 
-  <h5 class="pageLink">@Html.ActionLink("Back to list", "Index")</h5>
+  <h5 class="pageLink">@Html.ActionLink("Cancel", "Index")</h5>
 
 </div>

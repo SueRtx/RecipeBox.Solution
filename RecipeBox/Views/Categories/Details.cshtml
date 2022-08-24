@@ -19,9 +19,9 @@
     <ul>
     @foreach(var join in Model.JoinEntities)
     {
-      <li>@join.Recipe.Name</li>
-      <li> @join.Recipe.Ingredients</li>
-      <li> @join.Recipe.Instructions</li>
+      <li><strong>@join.Recipe.Name</strong> 
+      <br/>Ingredients: @join.Recipe.Ingredients 
+      <br/>Instruction: @join.Recipe.Instructions</li>
     }
     </ul>
   }
@@ -33,5 +33,5 @@
   <h5 class="pageLink">@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</h5>
 
   <h5 class="pageLink">@Html.ActionLink("Category List", "Index")</h5>
-
+  <h5 class="pageLink">@Html.ActionLink("Home", "Index", "Home")</h5>
 </div>

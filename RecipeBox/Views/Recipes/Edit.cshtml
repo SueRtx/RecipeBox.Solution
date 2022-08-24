@@ -22,11 +22,10 @@
     @Html.LabelFor(model => model.Instructions)
     @Html.EditorFor(model => model.Instructions)
 
-
-    @Html.Label("Select Category")
-    @Html.DropDownList("CategoryId")
+    @* @Html.Label("Select Category")
+    @Html.DropDownList("CategoryId") *@
   <br />
-    <input type="submit" value="Save" class="pageLink" />
+    <input type="submit" value="Save" class="btn" />
   }
 
   <h5 class="pageLink">@Html.ActionLink("Cancel", "Index")</h5>
@@ -34,5 +33,3 @@
 
 
 
-<h5 class="pageLink">@Html.ActionLink("Cancel", "Index")</h5>
-</div>

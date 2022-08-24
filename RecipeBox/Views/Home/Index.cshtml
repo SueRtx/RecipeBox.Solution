@@ -2,11 +2,70 @@
   Layout = "_Layout";
 }
 
-<div class="container">
+@using RecipeBox.Models
+@model List<RecipeBox.Models.Recipe>
+
+
+
+<div class = "container">
+  <h1>R E C I P E B O X</h1>
+  @if (User.Identity.IsAuthenticated)
+  {
+  <h3>Welcome @User.Identity.Name !</h3>
+  @using (Html.BeginForm("LogOff", "Account"))
+    {
+      <input type="submit" class="btn btn-primary" value="Log Out"/>
+    }
+  }
+  else
+  {
+    <h5>@Html.ActionLink("Create/Login Account", "Index", "Account")</h5>
+  }
+<hr />
+
+  <h5 class = "pageLink">@Html.ActionLink("Add Category", "Create", "Categories")</h5>
+  <h5  class = "pageLink">@Html.ActionLink("Add Recipe", "Create", "Recipes")</h5>
+<br />
+  <div class = "row">
+    <div class = "col">
+      @if (ViewBag.Categories.Count == 0)
+      {
+        <h3>No Category Yet!</h3>
+      }
+      else
+      {
+        <h2>Categories List</h2>
+        <h6>*Click on Category to See Details* </h6>
+        @foreach (Category category in @ViewBag.Categories)
+        {
+          <li>@Html.ActionLink($"{ category.Name }", "Details", "Categories", new { id = category.CategoryId }, new { @class = "linkWordColor" })</li>
+        }
+      }
+    </div>
+    <div class = "col">
+      @if (ViewBag.Recipes.Count == 0) 
+      {
+        <h3>No Recipe Yet!</h3>
+      }
+      else
+      {
+        <h2>Recipe List</h2>
+        <h6>*Click on Recipe to See Details* </h6>
+        @foreach (Recipe recipe in ViewBag.Recipes)
+        {
+          <li>@Html.ActionLink($"{ recipe.Name }", "Details", "Recipes", new { id = recipe.RecipeId }, new { @class = "linkWordColor" })</li>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+
+@* <div class="container">
   <h1>Welcome to the To Recipe Box!</h1>
 
-  @* <p>@Html.ActionLink("See all items", "Index", "Items")</p>  *@
+  
   <p>@Html.ActionLink("See all categories", "Index", "Categories")</p>
   <p>@Html.ActionLink("Create an account", "Index", "Account")</p>
   
-</div>
+</div> *@

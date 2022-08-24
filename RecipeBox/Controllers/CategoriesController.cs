@@ -1,24 +1,35 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace RecipeBox.Controllers
 {
+  [Authorize]
   public class CategoriesController : Controller
   {
     private readonly RecipeBoxContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public CategoriesController(RecipeBoxContext db)
+    public CategoriesController(UserManager<ApplicationUser> userManager, RecipeBoxContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index ()
     {
-      List<Category> model = _db.Categories.ToList();
-      return View(model);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userCategories = _db.Categories.Where(entry => entry.User.Id == currentUser.Id).ToList();
+
+      return View(userCategories);
     }
 
     public ActionResult Create()
@@ -27,8 +38,11 @@ namespace RecipeBox.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Category category)
+    public async Task<ActionResult> Create(Category category)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      category.User = currentUser;
       _db.Categories.Add(category);
       _db.SaveChanges();
       return RedirectToAction("Index");
